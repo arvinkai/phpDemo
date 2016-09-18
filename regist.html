@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../static-lib/css/mui.min.css" rel="stylesheet" />
+
+	</head>
+
+	<body>
+		<div class="mui-input-group">
+			<div class="mui-ellipsis">
+				<label>username:</label>
+				<input type="text" name="uname" id="uname" value="" maxlength="20" style="width: 200px;" />
+				<button id="checkname" type="button" class="mui-btn mui-btn-blue mui-btn-outlined" style="margin-top: 7px;">检查</button>
+			</div>
+
+			<div class="mui-ellipsis">
+				<label>realname:</label>
+				<input type="text" name="realname" id="realname" value="" />
+			</div>
+
+			<div class="mui-ellipsis">
+				<label>pwd:</label>
+				<input type="text" name="pwd" id="pwd" value="" />
+			</div>
+
+			<div class="mui-ellipsis">
+				<label>checkpwd:</label>
+				<input type="text" name="checkpwd" id="checkpwd" value="" />
+			</div>
+
+			<div class="mui-ellipsis">
+				<label>genders:</label>&nbsp;&nbsp;&nbsp;
+				<input type="radio" name="gender" id="man" value="0" checked/>男&nbsp;&nbsp;&nbsp;
+				<input type="radio" name="gender" id="woman" value="1" />女
+			</div>
+
+			<div class="mui-ellipsis">
+				<label>borthday:</label>
+				<input type="text" name="borthday" id="borthday" value="" />
+			</div>
+
+			<div class="mui-ellipsis">
+				<label>tel:</label>
+				<input type="text" name="tel" id="tel" value="" />
+			</div>
+
+			<div class="mui-ellipsis">
+				<label>qq:</label>
+				<input type="text" name="qq" id="qq" value="" />
+			</div>
+
+			<div class="mui-ellipsis">
+				<label>icon:</label>
+				<input type="text" name="icon" id="icon" value="icon1" />
+			</div>
+
+			<div class="mui-ellipsis">
+				<label>Email:</label>
+				<input type="text" name="Email" id="Email" value="" />
+			</div>
+
+			<div class="mui-ellipsis">
+				<label>Homepage:</label>
+				<input type="text" name="Homepage" id="Homepage" value="" />
+			</div>
+
+			<div class="mui-ellipsis">
+				<label>add:</label>
+				<input type="text" name="add" id="add" value="" />
+			</div>
+			<button id="submit" type="button" class="mui-btn mui-btn-blue mui-btn-block">regist</button>
+		</div>
+
+		<script src="../static-lib/js/mui.min.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+			(function($, doc) {
+				var uname = document.getElementById('uname');
+				var realname = document.getElementById('realname');
+				var pwd = document.getElementById('pwd');
+				var checkpwd = document.getElementById('checkpwd');
+				var genders = document.getElementsByName('gender');
+				var borthday = document.getElementById('borthday');
+				var tel = document.getElementById('tel');
+				var qq = document.getElementById('qq');
+				var email = document.getElementById('Email');
+				var homepage = document.getElementById('Homepage');
+				var add = document.getElementById('add');
+				var icon = document.getElementById('icon');
+
+				document.getElementById('checkname').addEventListener('tap', function() {
+					var unameValue = uname.value;
+
+					mui.post('http://localhost:80/forumObject/check_name.php', {
+						uname: unameValue
+					}, function(data) {
+						document.write(data);
+					}, 'html');
+
+				});
+				
+					document.getElementById('submit').addEventListener('tap', function() {
+					var unameValue = uname.value;
+					var realnameValue = realname.value;
+					var pwdValue = pwd.value;
+					var checkpwdValue = checkpwd.value;
+					var gender = 0;
+					for(var i = 0; i < genders.length; ++i) {
+						if(genders[i].checked) {
+							gender = genders[i].value;
+						}
+					}
+					var borthdayValue = borthday.value;
+					var telValue = tel.value;
+					var qqValue = qq.value;
+					var emailValue = email.value;
+					var homepageValue = homepage.value;
+					var addValue = add.value;
+					var iconValue = icon.value;
+
+					mui.post('http://localhost:80/forumObject/regist.php', {
+						uname: unameValue,
+						rname: realnameValue,
+						pwd: pwdValue,
+						cpwd: checkpwdValue,
+						gender: gender,
+						borthday: borthdayValue,
+						tel: telValue,
+						qq: qqValue,
+						email: emailValue,
+						homepage: homepageValue,
+						addr: addValue,
+						icon: iconValue
+					}, function(data) {
+						document.write(data);
+					}, 'html');
+				});
+			}(mui, document))
+		</script>
+	</body>
+
+</html>
