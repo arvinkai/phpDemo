@@ -19,53 +19,69 @@ include_once 'conn.php';
 			<label class="mui-h4" style="color: lightgrey;">论坛DEMO</label>
 		</div>
 		<?php
-if (!$_SESSION['isLogin']) {
+if (isset($_SESSION['isLogin'])) {
     ?>
-	    <div class="mui-pull-right"style="padding-top: 10px;">
-	    	<label class="mui-h5" style="padding-top: 15px;">用户名:</label>
-			<input id="username" placeholder="输入用户名" style="width: 100px;" maxlength="20"/>
-
-	    	<label class="mui-h5" style="padding-top: 15px;">密码:</label>
-			<input id="pwd" placeholder="输入密码" style="width: 100px;" maxlength="20"/>
-	    	
-	    	<button id="login" style="padding: 3px;">登陆</button>
-	    	<a href="regist.html">注册</a>
-	    </div>
-		<?php
-} else {
-    ?>
+    		<?php
+    if (! $_SESSION['isLogin']) {
+        ?>
 	    <div class="mui-pull-right" style="padding-top: 10px;">
-			<a href="#"><?php echo $_SESSION['username'];?></a>
-			<a href="logout.php">退出</a>
+			<label class="mui-h5" style="padding-top: 15px;">用户名:</label> <input
+				id="username" placeholder="输入用户名" style="width: 100px;"
+				maxlength="20" /> <label class="mui-h5" style="padding-top: 15px;">密码:</label>
+			<input id="pwd" placeholder="输入密码" style="width: 100px;"
+				maxlength="20" />
+
+			<button id="login" style="padding: 3px;">登陆</button>
+			<a href="regist.html">注册</a>
 		</div>
 		<?php
+    } else {
+        ?>
+	    <div class="mui-pull-right" style="padding-top: 10px;">
+			<a href="#"><?php echo $_SESSION['username'];?></a> <a
+				href="logout.php">退出</a>
+		</div>
+		<?php
+    }
+    ?>
+		    <?php
+} else {
+    ?>
+    	    <div class="mui-pull-right" style="padding-top: 10px;">
+			<label class="mui-h5" style="padding-top: 15px;">用户名:</label> <input
+				id="username" placeholder="输入用户名" style="width: 100px;"
+				maxlength="20" /> <label class="mui-h5" style="padding-top: 15px;">密码:</label>
+			<input id="pwd" placeholder="输入密码" style="width: 100px;"
+				maxlength="20" />
+
+			<button id="login" style="padding: 3px;">登陆</button>
+			<a href="regist.html">注册</a>
+		</div>
+    <?php
 }
-?>		
+?>
+		
 	</header>
 
 	<ul class="mui-table-view" style="margin-top: 47px;">
 		<li class="mui-table-view-cell mui-media"><a
-			href="http://localhost:80/forumObject/zthf.php?zhuanqu=1">
-				<div class="mui-media-body mui-pull-right">
-					<!--<img class="mui-media-object mui-pull-right" src="http://placehold.it/40x30">-->
-					创建时间: 2016-01-01
-				</div>
-
+			href="zthf.php?zhuanqu=1">
+				<div class="mui-media-body mui-pull-right">创建时间: 2016-01-01</div>
 				<div class="mui-media-body">
-					幸福<?php echo $_SESSION['username'];?>
+					幸福
 					<p class="mui-ellipsis">能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
 				</div>
 		</a></li>
 		<li class="mui-table-view-cell mui-media"><a
-			href="http://localhost:80/forumObject/zthf.php?zhuanqu=2">
+			href="zthf.php?zhuanqu=2">
 				<div class="mui-media-body mui-pull-right">创建时间: 2016-01-01</div>
 				<div class="mui-media-body">
-					木屋<?php echo $_SESSION['isLogin'];?>
+					木屋
 					<p class="mui-ellipsis">想要这样一间小木屋，夏天挫冰吃瓜，冬天围炉取暖.</p>
 				</div>
 		</a></li>
 		<li class="mui-table-view-cell mui-media"><a
-			href="http://localhost:80/forumObject/zthf.php?zhuanqu=3">
+			href="zthf.php?zhuanqu=3">
 				<div class="mui-media-body mui-pull-right">创建时间: 2016-01-01</div>
 				<div class="mui-media-body">
 					CBD
@@ -85,7 +101,7 @@ if (!$_SESSION['isLogin']) {
 				return;
 			}
 			
-			mui.post('http://localhost:80/forumObject/login.php',{
+			mui.post('login.php',{
 				username: username.value,
 				password: password.value
 			},function(data){

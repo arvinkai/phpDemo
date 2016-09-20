@@ -21,6 +21,6 @@ include_once 'conn.php';
             echo mysql_error();
         }
     }
-    echo "<script>location='http://localhost:80/forumObject/index.php';</script>"
+    echo "<script>location='index.php';</script>"
 	
 ?>

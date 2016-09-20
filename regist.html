@@ -96,7 +96,7 @@
 				document.getElementById('checkname').addEventListener('tap', function() {
 					var unameValue = uname.value;
 
-					mui.post('http://localhost:80/forumObject/check_name.php', {
+					mui.post('check_name.php', {
 						uname: unameValue
 					}, function(data) {
 						document.write(data);
@@ -123,7 +123,7 @@
 					var addValue = add.value;
 					var iconValue = icon.value;
 
-					mui.post('http://localhost:80/forumObject/regist.php', {
+					mui.post('regist.php', {
 						uname: unameValue,
 						rname: realnameValue,
 						pwd: pwdValue,
