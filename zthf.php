@@ -13,16 +13,15 @@
 
 <body>
 <?php
-session_start();
 include_once("conn.php");
-$page = 1;//(isset($_GET['page'])) ? $_GET['page'] : "1";
-$zhuti = 'HelloWord';//(isset($_GET['zhuti'])) ? $_GET['zhuti'] : "PHP";
+$page = (isset($_GET['page'])) ? $_GET['page'] : "1";
+$zhuti = (isset($_GET['zhuti'])) ? $_GET['zhuti'] : "PHP";
 ?>
 
 <td width="776" height="30">&nbsp;&nbsp;&nbsp;&nbsp;主题:【<?php echo $zhuti?>】</td>
 
 <?php
-// $sql = "select * from mr_zqlb where id='" . $_GET['recid'] . "'";
+// $sql = "select * from mr_zqlb where id='" . $_GET['zhuanqu'] . "'";
 $sql = "select * from mr_zqlb where `id`='2';";
 $rel = mysql_query($sql);
 $ztrow = mysql_fetch_array($rel);
@@ -30,8 +29,8 @@ $ztrow = mysql_fetch_array($rel);
 
 <tr>
 <?php
-// $update = "update mr_zqlb set fwjl=fwjl+1 where id='" . $_GET['recid'] . "'";
-$update = "update mr_zqlb set `fwjl`=fwjl+1 where `id`='2'";
+$update = "update mr_zqlb set fwjl=fwjl+1 where id='" . $_GET['zhuanqu'] . "'";
+//$update = "update mr_zqlb set `fwjl`=fwjl+1 where `id`='2'";
 $rel = mysql_query($update);
 $sql = "select * from mr_user where `username`='".$ztrow['username']."'";
 $rel = mysql_query($sql);
@@ -63,7 +62,7 @@ $row = mysql_fetch_array($rel);
 			<td width="80%" height="24">&nbsp;Email:<?php echo $row['email'];?>&nbsp;QQ:<?php echo $row['qq'];?>&nbsp;发表时间:
 	<?php echo $ztrow['fbsj'];?></td>
 			<td width="20%"><a
-				href="hftj.php?zhuti=<?php urlencode($zhuti);?>&recid=<?php echo $_GET['recid'];?>">回复</a></td>
+				href="hftj.php?zhuti=<?php urlencode($zhuti);?>&zhuanqu=<?php echo $_GET['zhuanqu'];?>">回复</a></td>
 		</tr>
 		<tr>
 			<td width="505"><?php echo $ztrow['neirong'];?></td>
@@ -73,8 +72,8 @@ $row = mysql_fetch_array($rel);
 
 <?php 
     $page_size=2;
-    //$sql = "select * from mr_hflb where ljid='".$_GET['recid']."';";
-	$sql = "select * from mr_hflb where ljid='1';";
+    $sql = "select * from mr_hflb where ljid='".$_GET['zhuanqu']."';";
+	//$sql = "select * from mr_hflb where ljid='1';";
     $rel =mysql_query($sql);
     $message_count = mysql_num_rows($rel);
     if (0 < $message_count) {
@@ -85,9 +84,9 @@ $row = mysql_fetch_array($rel);
 <?php
     $page_count = ceil($message_count/$page_size);
     $offset = ($page-1)*$page_size;
-    //$sql = "select * from mr_hflb where lijd='".$_GET['recid']."'order by id
-	//desc limit $offset,$page_size;";
-	$sql = "select * from mr_hflb where ljid='1'order by id desc limit $offset,$page_size;";
+    $sql = "select * from mr_hflb where ljid='".$_GET['zhuanqu']."'order by id
+	desc limit $offset,$page_size;";
+	//$sql = "select * from mr_hflb where ljid='1'order by id desc limit $offset,$page_size;";
     $rel = mysql_query($sql);
     while ($myrow = mysql_fetch_array($rel)) {
 ?>
@@ -102,7 +101,6 @@ $row = mysql_fetch_array($rel);
 	<li class="mui-table-view-cell">
 		<div class="mui-table">
 			<div class="mui-table-cell mui-col-xs-10">
-				<!-- <h4 class="mui-ellipsis">信息化推进办公室张彦合同付款信息化</h4> -->
 				<h5>用户：<?php echo $myrow['username']?></h5>
 				<p class="mui-h6"><?php echo $myrow['hfnr'];?></p>
 			</div>
@@ -120,27 +118,27 @@ $row = mysql_fetch_array($rel);
 <ul class="mui-pagination" style="padding-left:50%">
 	<li class="mui-disabled">
 		<!-- <span> &laquo; </span> -->
-		<a href="ztf.php?zhuti=<?php echo $zhuti;?>&recid=<?php echo $_GET['recid']?>&page=<?php echo $page-1?>">&raquo;</a>
+		<a href="ztf.php?zhuti=<?php echo $zhuti;?>&zhuanqu=<?php echo $_GET['zhuanqu'];?>&page=<?php echo $page-1?>">&raquo;</a>
 	</li>
 	<?php
 		for($i=1; $i<=$page_count; ++$i){
 			if(1 == $i){
 			?>
 			<li class="mui-active">
-				<a href="#"><?php echo $i;?></a>
+				<a href="ztf.php?zhuti=<?php echo $zhuti;?>&zhuanqu=<?php echo $_GET['zhuanqu'];?>&page=<?php echo $i;?>"><?php echo $i;?></a>
 			</li>						
 	<?php
 			}else{
 	?>
 	<li>
-		<a href="#"><?php echo $i;?></a>
+		<a href="ztf.php?zhuti=<?php echo $zhuti;?>&zhuanqu=<?php echo $_GET['zhuanqu'];?>&page=<?php echo $i;?>"><?php echo $i;?></a>
 	</li>
 	<?php
 			}
 		}
 	?>
 	<li>
-		<a href="ztf.php?zhuti=<?php echo $zhuti;?>&recid=<?php echo $_GET['recid']?>&page=<?php echo $page+1?>">&raquo;</a>
+		<a href="ztf.php?zhuti=<?php echo $zhuti;?>&zhuanqu=<?php echo $_GET['zhuanqu'];?>&page=<?php echo $page+1;?>">&raquo;</a>
 	</li>
 </ul>
 <?php 

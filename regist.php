@@ -42,7 +42,8 @@
 				echo "<li><font color=red>".$username."</font>恭喜您注册成功！";
 				echo "<meta http-equiv=\"Refresh\" content=\"3;url=regist.html\">5秒钟后转入主页，请稍等...";
             }else{
-				echo "<font class='#ff0000'>注册失败！！！</font>";
+// 				echo "<font class='#ff0000'>注册失败！！！</font>";
+				echo "<script>alert('注册失败！！！');history.back();</script>";
 				echo mysql_error();
 			}
                      
